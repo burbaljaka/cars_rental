@@ -10,7 +10,7 @@ class Cars(models.Model):
     car_model = models.CharField(max_length = 50)
     car_issue_year = models.IntegerField()
     car_adding_date = models.DateField(default = timezone.now())
-    car_renter = models.CharField(blank = True)
+    car_renter = models.ForeignKey(User, on_delete = models.SET_NULL, null = True, blank = True)
 
     LOAN_STATUS = (
         ('m', 'Maintenance'),
@@ -40,7 +40,7 @@ class Loans(models.Model):
     loan_renter = models.ForeignKey(User, on_delete=models.SET_NULL, null = True, blank = True)
     loan_date_of_loan = models.DateField(default = timezone.now())
     loan_date_of_return = models.DateField()
-    loan_car = models.ForeignKey(Car, on_delete=models.SET_NULL, null = True, blank = True)
+    loan_car = models.ForeignKey(Cars, on_delete=models.SET_NULL, null = True, blank = True)
 
     def __str__(self):
         return self.loan_car.car_mark, self.loan_car.car_model, self.loan_date_of_loan

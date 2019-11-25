@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from djangp.http import HttpResponse
-from django.contrib.auth import authenticate, LoginForm
+from django.http import HttpResponse
+from django.contrib.auth import authenticate, login
 from .models import Cars
 from django.utils.timezone import localtime, now
 # Extra Imports for the Login and Logout Capabilities

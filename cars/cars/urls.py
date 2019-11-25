@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rental import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(''',views.index,name='index'),
+    path('',views.index,name='index'),
     path('special/',views.special,name='special'),
-    path('logout/', views.user_logout, name='logout'),
+    path('logout/', views.user_logout, name='logout')
 ]
