@@ -37,6 +37,7 @@ class Cars(models.Model):
         return reverse('car_detail', args=[str(self.id)])
 
 class Loans(models.Model):
+<<<<<<< HEAD
     loan_renter = models.ForeignKey(User, on_delete=models.SET_NULL, null = True, blank = True)
     loan_date_of_loan = models.DateField(default = timezone.now())
     loan_date_of_return = models.DateField()
@@ -44,3 +45,8 @@ class Loans(models.Model):
 
     def __str__(self):
         return self.loan_car.car_mark, self.loan_car.car_model, self.loan_date_of_loan
+=======
+    renter = models.ForeignKey(User, on_delete = DO_Nothing, null = True, blank = True)
+    date_of_loan = models.DateField(default = timezone.now())
+    date_of_return = models.DateField()
+>>>>>>> master
