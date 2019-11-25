@@ -22,23 +22,23 @@
           {# Some logic on what to display for last item#}
           {% if user.is_authenticated %}
             <li><a href="{% url 'logout' %}">Logout</a></li>
-            <li><a class="navbar-link" href="{% url 'basic_app:user_tasks_view' %}">Your tasks, {{ user.username }}</a></li>
+            <!-- <li><a class="navbar-link" href="{% url 'rental:user_tasks_view' %}">Your tasks, {{ user.username }}</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="{% url 'basic_app:reports' %}?period=this_day">This day</a></li>
-                <li><a href="{% url 'basic_app:reports' %}?period=last_day">Previous day</a></li>
-                <li><a href="{% url 'basic_app:reports' %}?period=15_days">15 last days</a></li>
+                <li><a href="{% url 'rental:reports' %}?period=this_day">This day</a></li>
+                <li><a href="{% url 'rental:reports' %}?period=last_day">Previous day</a></li>
+                <li><a href="{% url 'rental:reports' %}?period=15_days">15 last days</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="{% url 'basic_app:reports' %}?period=this_month">Current month</a></li>
+                <li><a href="{% url 'rental:reports' %}?period=this_month">Current month</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="{% url 'basic_app:reports' %}?period=last_month">Last month</a></li>
+                <li><a href="{% url 'rental:reports' %}?period=last_month">Last month</a></li>
               </ul>
-            </li>
+            </li> -->
 
           {% else %}
-            <li><a class="navbar-link" href="{% url 'basic_app:user_login' %}">Login</a></li>
-            <li><a class="navbar-link" href="{% url 'basic_app:register' %}">Register</a></li>
+            <li><a class="navbar-link" href="{% url 'user_login' %}">Login</a></li>
+            <li><a class="navbar-link" href="{% url 'register' %}">Register</a></li>
           {% endif %}
 
         </ul>

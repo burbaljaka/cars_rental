@@ -8,14 +8,15 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from rental.forms import UserForm
 
 def index(request):
-    return render(request,'basic_app/index.html')
+    return render(request,'rental/index.html')
 
 @login_required
 def special(request):
     # Remember to also set login url in settings.py!
-    # LOGIN_URL = '/basic_app/user_login/'
+    # LOGIN_URL = '/rental/user_login/'
     return HttpResponse("You are logged in. Nice!")
 
 @login_required
@@ -34,10 +35,9 @@ def register(request):
         # Get info from "both" forms
         # It appears as one form to the user on the .html page
         user_form = UserForm(data=request.POST)
-        profile_form = UserProfileInfoForm(data=request.POST)
 
         # Check to see both forms are valid
-        if user_form.is_valid() and profile_form.is_valid():
+        if user_form.is_valid():
 
             # Save User Form to Database
             user = user_form.save()
@@ -51,38 +51,38 @@ def register(request):
             # Now we deal with the extra info!
 
             # Can't commit yet because we still need to manipulate
-            profile = profile_form.save(commit=False)
-
-            # Set One to One relationship between
-            # UserForm and UserProfileInfoForm
-            profile.user = user
-
+            # profile = profile_form.save(commit=False)
+            #
+            # # Set One to One relationship between
+            # # UserForm and UserProfileInfoForm
+            # profile.user = user
+            #
             # Check if they provided a profile picture
-            if 'profile_pic' in request.FILES:
-                print('found it')
-                # If yes, then grab it from the POST form reply
-                profile.profile_pic = request.FILES['profile_pic']
-
-            # Now save model
-            profile.save()
-
-            # Registration Successful!
+            # if 'profile_pic' in request.FILES:
+            #     print('found it')
+            #     # If yes, then grab it from the POST form reply
+            #     profile.profile_pic = request.FILES['profile_pic']
+            #
+            # # Now save model
+            # profile.save()
+            #
+            # # Registration Successful!
             registered = True
 
         else:
             # One of the forms was invalid if this else gets called.
-            print(user_form.errors,profile_form.errors)
+            print(user_form.errors)
 
     else:
         # Was not an HTTP post so we just render the forms as blank.
         user_form = UserForm()
-        profile_form = UserProfileInfoForm()
+        # profile_form = UserProfileInfoForm()
 
     # This is the render and context dictionary to feed
     # back to the registration.html file page.
-    return render(request,'basic_app/registration.html',
+    return render(request,'rental/registration.html',
                           {'user_form':user_form,
-                           'profile_form':profile_form,
+                           # 'profile_form':profile_form,
                            'registered':registered})
 
 def user_login(request):
@@ -104,16 +104,14 @@ def user_login(request):
                 # Send the user back to some page.
                 # In this case their homepage.
 
-                return HttpResponseRedirect(reverse('basic_app:user_tasks_view'))
-#                return render(request, 'basic_app/tasks.html', context)
+                return HttpResponseRedirect(reverse('rental:user_tasks_view'))
+#                return render(request, 'rental/tasks.html', context)
             else:
                 # If account is not active:
                 return HttpResponse("Your account is not active.")
         else:
-            print("Someone tried to login and failed.")
-            print("They used username: {} and password: {}".format(username,password))
             return HttpResponse("Invalid login details supplied.")
 
     else:
         #Nothing has been provided for username or password.
-        return render(request, 'basic_app/login.html', {})
+        return render(request, 'rental/login.html', {})

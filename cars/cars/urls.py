@@ -16,10 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from rental import views
+from django.conf.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index,name='index'),
+    path('rental/', include('rental.urls')),
     path('special/',views.special,name='special'),
-    path('logout/', views.user_logout, name='logout')
+    path('logout/', views.user_logout, name='logout'),
+    path('register/',views.register,name='register'),
+    path('user_login/',views.user_login,name='user_login'),
 ]
