@@ -114,8 +114,8 @@ def user_login(request):
                 # Send the user back to some page.
                 # In this case their homepage.
                 current_user_id = request.user.id
-                loan_cars = Loan.objects.filter(loan_renter = current_user_id)
-                if loan_cars == 0:
+                loan_cars = Loan.objects.filter(loan_renter = request.user.id)
+                if len(loan_cars) != 0:
                     return HttpResponseRedirect(reverse('rental:client_Loan_Cars'))
                 else:
                     return HttpResponseRedirect(reverse('rental:car_list'))
@@ -132,15 +132,11 @@ def user_login(request):
 
 def client_Loan_Cars(request):
     loan_cars = Loan.objects.filter(loan_renter = request.user.id)
-    return render (request, 'rental/cars_list.html', context = {'cars_list': loan_cars})
+    return render (request, 'rental/client_cars.html', context = {'cars_list': loan_cars})
 
 def car_list(request):
-    client_cars = Loan.objects.filter(loan_renter = request.user.id)
-    if not client_cars:
-        available_cars = Car.objects.filter(car_status = 'a')
-        return render (request, 'rental/cars_list.html', context = {'cars_list': available_cars})
-    else:
-        return HttpResponseRedirect(reverse('rental:client_Loan_Cars'))
+    available_cars = Car.objects.filter(car_status = 'a')
+    return render (request, 'rental/cars_list.html', context = {'cars_list': available_cars})
 
 
 def User_info(request):
