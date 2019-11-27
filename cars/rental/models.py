@@ -34,7 +34,7 @@ class Car(models.Model):
         return str(self.car_mark) + ' ' + str(self.car_model)
 
     def get_auto_absolute_url(self):
-        return reverse('car_detail', args=[str(self.id)])
+        return reverse('rental:car_detail', args=[str(self.id)])
 
 class Loan(models.Model):
     loan_renter = models.ForeignKey(User, on_delete=models.SET_NULL, null = True, blank = True)
