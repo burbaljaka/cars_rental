@@ -114,11 +114,7 @@ def user_login(request):
                 # Send the user back to some page.
                 # In this case their homepage.
                 current_user_id = request.user.id
-                loan_cars = Loan.objects.filter(loan_renter = request.user.id)
-                if len(loan_cars) != 0:
-                    return HttpResponseRedirect(reverse('rental:client_Loan_Cars'))
-                else:
-                    return HttpResponseRedirect(reverse('rental:car_list'))
+                return HttpResponseRedirect(reverse('rental:car_list'))
 #                return render(request, 'rental/tasks.html', context)
             else:
                 # If account is not active:
@@ -142,7 +138,6 @@ def car_list(request):
 def User_info(request):
 
     User.objects.filter(pk = request.user.id)
-    
+
 class CarDetailView(generic.DetailView):
     model = Car
-    

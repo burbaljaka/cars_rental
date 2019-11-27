@@ -46,10 +46,10 @@ class Loan(models.Model):
         return str(self.loan_car.car_mark) + ' ' + str(self.loan_car.car_model) + ' ' + str(self.loan_date_of_loan)
 
     def get_car_model(self):
-        return Car.objects.filter(pk=self.loan_car)[0].car_model
+        return str(Car.objects.filter(pk=self.loan_car)[0].car_model)
 
     def get_car_mark(self):
-        return Car.objects.filter(pk=self.loan_car)[0].car_mark
+        return str(Car.objects.filter(pk=self.loan_car)[0].car_mark)
 
-    def get_car_url(self):
-        return Car.objects.filter(pk=self.loan_car)[0].get_auto_absolute_url()
+    def get_auto_absolute_url(self):
+        return reverse('rental:car_detail', args=[str(self.id)])

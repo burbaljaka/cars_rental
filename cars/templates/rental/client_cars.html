@@ -6,7 +6,7 @@
 
       {% for car in cars_list %}
       <li>
-        <a href="{{ car.get_auto_absolute_url }}">{{ car.get_car_mark }} {{car.get_car_model}}</a>
+        <a href="{{ car.get_auto_absolute_url }}">{{ car.loan_date_of_return }}</a>
       </li>
       {% endfor %}
 
