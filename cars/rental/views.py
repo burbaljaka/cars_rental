@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
-from .models import Cars, Loans
+from .models import Car, Loan
 from django.utils.timezone import localtime, now
 # Extra Imports for the Login and Logout Capabilities
 from django.contrib.auth import authenticate, login, logout
@@ -21,7 +21,7 @@ def index(request):
         if current_user_auth == False:
             return HttpResponseRedirect(reverse('user_login'))
         else:
-            return render(request,'rental/index.html')
+            return HttpResponseRedirect(reverse('rental:cars_list'))
 
 @login_required
 def special(request):
@@ -114,11 +114,11 @@ def user_login(request):
                 # Send the user back to some page.
                 # In this case their homepage.
                 current_user_id = request.user.id
-                loan_cars = Loans.objects.filter(car_renter = current_user_id)
+                loan_cars = Loans.objects.filter(loan_renter = current_user_id)
                 if loan_cars == 0:
-                    return HttpResponseRedirect(reverse('rental:loan_car'))
+                    return HttpResponseRedirect(reverse('rental:client_Loan_Cars'))
                 else:
-                    return HttpResponseRedirect(reverse('rental:user_loans'))
+                    return HttpResponseRedirect(reverse('rental:car_list'))
 #                return render(request, 'rental/tasks.html', context)
             else:
                 # If account is not active:
@@ -130,20 +130,19 @@ def user_login(request):
         #Nothing has been provided for username or password.
         return render(request, 'rental/login.html', {})
 
-class Client_Loan_Cars(generic.ListView):
-    model = Loans
+def client_Loan_Cars(request):
+    loan_cars = Loan.objects.filter(loan_renter = request.user.id)
+    return render (request, 'rental/cars_list.html', context = {'cars_list': loan_cars})
 
-    def get_queryset(self):
-        return Loans.objects.filter(loan_renter = request.user.id).values('car_mark','car_model', 'car_issue_year')
+def car_list(request):
+    client_cars = Loan.objects.filter(loan_renter = request.user.id)
+    if not client_cars:
+        available_cars = Car.objects.filter(car_status = 'a')
+        return render (request, 'rental/cars_list.html', context = {'cars_list': available_cars})
+    else:
+        return HttpResponseRedirect(reverse('rental:client_Loan_Cars'))
 
-class Available_Cars(generic.ListView):
-    model = Cars
 
-    def get_queryset(self):
-        return Cars.objects.filter(car_status = 'Available')
+def User_info(request):
 
-class User(generic.DetailView):
-    model = User
-
-    def get_queryset(self):
-        return User.objects.filter(pk = request.user.id)
+    User.objects.filter(pk = request.user.id)

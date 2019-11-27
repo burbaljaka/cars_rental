@@ -1,0 +1,17 @@
+{% block content %}
+    <h1>Our Available cars</h1>
+
+    {% if cars_list %}
+    <ul>
+
+      {% for car in cars_list %}
+      <li>
+        <a href="{{ car.get_auto_absolute_url }}">{{ car.car_mark }} {{car.car_model}}</a> {{ car.car_issue_year }}
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no available cars</p>
+    {% endif %}
+{% endblock %}
