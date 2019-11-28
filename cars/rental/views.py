@@ -16,15 +16,7 @@ from .forms import CarRent
 from django.utils import timezone
 
 def index(request):
-    try:
-        current_user_auth = request.user.is_authenticated
-    except:
-        return HttpResponseRedirect(reverse('user_login'))
-    else:
-        if current_user_auth == False:
-            return HttpResponseRedirect(reverse('user_login'))
-        else:
-            return HttpResponseRedirect(reverse('rental:cars_list'))
+    return HttpResponseRedirect(reverse('rental:cars_list'))
 
 @login_required
 def special(request):
@@ -148,7 +140,6 @@ def car_list(request):
 def car_detail(request, pk):
     car_info = Car.objects.filter(pk = pk)[0]
     current_user_id = request.user.id
-    print(request.POST)
     if request.method == 'POST' and 'rent_button' in request.POST:
         form = CarRent(request.POST)
         if form.is_valid():
