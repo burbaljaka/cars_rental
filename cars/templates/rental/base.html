@@ -1,3 +1,4 @@
+    {% load i18n %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -15,18 +16,31 @@
         <ul class="nav navbar-nav">
 
           {# Django Home Link / Admin Link / Register Link#}
-          <li><a class="navbar-brand" href="{% url 'index' %}">Welcome page</a></li>
+          <li><a class="navbar-brand" href="{% url 'index' %}">{% trans "Welcome page" %}</a></li>
+          <li> {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            <div class="languages">
+              <p>{% trans "Language" %}:</p>
+              <ul class="languages">
+                {% for language in languages %}
+                <li><a href="/{{ language.code }}/"{% if language.code == LANGUAGE_CODE %} class="selected"{% endif %}>
+                  {{ language.name_local }}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </li>
 
 
 
           {# Some logic on what to display for last item#}
           {% if user.is_authenticated %}
-            <li><a href="{% url 'logout' %}">Logout</a></li>
-            <li><a href="{% url 'rental:client_cars' %}">Your cars</a></li>
+            <li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
+            <li><a href="{% url 'rental:client_cars' %}">{% trans 'Your cars'%}</a></li>
 
           {% else %}
-            <li><a class="navbar-link" href="{% url 'user_login' %}">Login</a></li>
-            <li><a class="navbar-link" href="{% url 'register' %}">Register</a></li>
+            <li><a class="navbar-link" href="{% url 'user_login' %}">{% trans 'Login' %}</a></li>
+            <li><a class="navbar-link" href="{% url 'register' %}">{% trans 'Register' %}</a></li>
           {% endif %}
 
         </ul>

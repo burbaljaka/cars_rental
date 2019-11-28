@@ -14,6 +14,7 @@ from django.contrib.auth.models import User
 from django.views.generic.edit import UpdateView, FormView
 from .forms import CarRent
 from django.utils import timezone
+from django.core.mail import send_mail
 
 def index(request):
     return HttpResponseRedirect(reverse('rental:cars_list'))
@@ -148,16 +149,19 @@ def car_detail(request, pk):
             car_info.car_rent_date = timezone.now()
             car_info.car_status = 'o'
             car_info.save()
+            # send_email_to_rent('rent', user, car_info)
             return HttpResponseRedirect(reverse('rental:client_cars'))
         else:
             print(form)
     elif request.method == 'POST' and 'return_button' in request.POST:
         form = CarRent(request.POST)
         if form.is_valid():
+            user = User.objects.get(pk = current_user_id)
             car_info.car_renter = None
             car_info.car_rent_date = None
             car_info.car_status = 'a'
             car_info.save()
+            # send_email_to_rent('rent', user, car_info)
             return HttpResponseRedirect(reverse('rental:client_cars'))
         else:
             print(form)
@@ -165,10 +169,20 @@ def car_detail(request, pk):
         car_info = Car.objects.filter(pk = pk)[0]
         return render (request, 'rental/car_detail.html', context = {'car':car_info})
 
-class CarUpdate(FormView):
-    model = Car
-    template_name = 'rental/car_update_form.html'
-    form_class = CarRent
-
-    def get_success_url(self):
-            return HttpResponseRedirect(reverse('rental:client_cars'))
+# def send_email_to_rent(type, user, car):
+#     if type == 'rent':
+#         send_mail(
+#         'You have rented a car',
+#         'Hi!You have rented a car {} {} at {}'.format(car.car_mark, car.car_model, car.car_rent_date),
+#         'from@example.com',
+#         [user.email],
+#         fail_silently=False,
+#         )
+#     elif type == 'return':
+#         send_mail(
+#         'You have returned a car',
+#         'Hi! You have returned a car {} {} at {}'.format(car.car_mark, car.car_model, car.car_return_date),
+#         'from@example.com',
+#         [user.email],
+#         fail_silently=False,
+#         )

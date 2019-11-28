@@ -1,7 +1,8 @@
 {% extends "rental/base.html" %}
+{% load i18n %}
 {% block body_block %}
 
-    <h1>Our Available cars</h1>
+    <h1>{% trans "Our Available cars" %}</h1>
 
     {% if cars_list %}
     <ol>

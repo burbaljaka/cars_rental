@@ -1,19 +1,20 @@
 {% extends 'rental/base.html' %}
+{% load i18n %}
 {% block body_block %}
   <div class="container">
     <div class="jumbotron">
-      <h1>Please Login</h1>
+      <h1>{% trans "Please Login" %}</h1>
 
         <form method="post" action="{% url 'user_login' %}">
           {% csrf_token %}
           {# A more "HTML" way of creating the login form#}
-          <label for="username">Username:</label>
+          <label for="username">{% trans "Username" %}:</label>
           <input type="text" name="username" placeholder="Username">
 
-          <label for="password"></label>
-          <input type="password" name="password">
+          <label for="password">{% trans "Password" %}</label>
+          <input type="password" name="password" placeholder="Password">
 
-          <input type="submit" name="" value="Login">
+          <input type="submit" name="" value="{% trans "Login"%}">
 
         </form>
 

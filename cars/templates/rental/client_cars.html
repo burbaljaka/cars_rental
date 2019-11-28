@@ -1,7 +1,8 @@
 {% extends "rental/base.html" %}
+{% load i18n %}
 {% block body_block %}
 
-    <h1>Your rented cars</h1>
+    <h1>{% trans "Your rented cars" %}</h1>
 
     {% if cars_list %}
     <ol>
@@ -9,12 +10,12 @@
       {% for car in cars_list %}
       <li>
         <a href="{{ car.get_auto_absolute_url }}">{{ car.car_mark }} {{car.car_model}}</a> {{ car.car_issue_year }}
-        <p>Rented: {{ car.car_rent_date }}</p>
+        <p>{% trans "Rented" %}: {{ car.car_rent_date }}</p>
       </li>
       {% endfor %}
 
     </ol>
     {% else %}
-      <p>You have no rented cars</p>
+      <p>{% trans "You have no rented cars" %}</p>
     {% endif %}
 {% endblock %}

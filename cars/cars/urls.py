@@ -17,13 +17,15 @@ from django.contrib import admin
 from django.urls import path
 from rental import views
 from django.conf.urls import include
+from django.conf.urls.i18n import i18n_patterns
 
-urlpatterns = [
+urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('',views.index,name='index'),
+    path('rosetta/', include('rosetta.urls')),
     path('rental/', include('rental.urls')),
     path('special/',views.special,name='special'),
     path('logout/', views.user_logout, name='logout'),
     path('register/',views.register,name='register'),
     path('user_login/',views.user_login,name='user_login'),
-]
+)

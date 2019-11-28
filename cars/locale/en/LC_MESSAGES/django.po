@@ -1,0 +1,96 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-28 16:18+0300\n"
+"PO-Revision-Date: 2019-11-28 15:30+0000\n"
+"Last-Translator: b'  <1@mail.ru>'\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.9.3\n"
+
+#: .\cars\settings.py:141
+msgid "English"
+msgstr ""
+
+#: .\cars\settings.py:142
+msgid "Russian"
+msgstr ""
+
+#: .\templates\rental\base.html:19
+msgid "Welcome page"
+msgstr ""
+
+#: .\templates\rental\base.html:24
+msgid "Language"
+msgstr ""
+
+#: .\templates\rental\base.html:38
+msgid "Logout"
+msgstr ""
+
+#: .\templates\rental\base.html:39
+msgid "Your cars"
+msgstr ""
+
+#: .\templates\rental\base.html:42 .\templates\rental\login.html:17
+msgid "Login"
+msgstr ""
+
+#: .\templates\rental\base.html:43
+msgid "Register"
+msgstr ""
+
+#: .\templates\rental\car_detail.html:5
+msgid "Name"
+msgstr ""
+
+#: .\templates\rental\car_detail.html:6
+msgid "Issue year"
+msgstr ""
+
+#: .\templates\rental\car_detail.html:9
+msgid "Rent it"
+msgstr ""
+
+#: .\templates\rental\car_detail.html:11
+msgid "Return"
+msgstr ""
+
+#: .\templates\rental\cars_list.html:5
+msgid "Our Available cars"
+msgstr ""
+
+#: .\templates\rental\client_cars.html:5
+msgid "Your rented cars"
+msgstr ""
+
+#: .\templates\rental\client_cars.html:13
+msgid "Rented"
+msgstr ""
+
+#: .\templates\rental\client_cars.html:19
+msgid "You have no rented cars"
+msgstr ""
+
+#: .\templates\rental\login.html:6
+msgid "Please Login"
+msgstr ""
+
+#: .\templates\rental\login.html:11
+msgid "Username"
+msgstr ""
+
+#: .\templates\rental\login.html:14
+msgid "Password"
+msgstr ""
