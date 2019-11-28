@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-28 16:18+0300\n"
+"POT-Creation-Date: 2019-11-28 18:34+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,7 +48,7 @@ msgstr "Ваши машины"
 msgid "Login"
 msgstr "Войти"
 
-#: .\templates\rental\base.html:43
+#: .\templates\rental\base.html:43 .\templates\rental\registration.html:17
 msgid "Register"
 msgstr "Зарегистрироваться"
 
@@ -73,16 +73,12 @@ msgid "Our Available cars"
 msgstr "Наши доступные машины"
 
 #: .\templates\rental\client_cars.html:5
-#, fuzzy
-#| msgid "Your cars"
 msgid "Your rented cars"
 msgstr "Ваши машины"
 
 #: .\templates\rental\client_cars.html:13
-#, fuzzy
-#| msgid "Rent it"
 msgid "Rented"
-msgstr "Арендовать"
+msgstr "Арендовано"
 
 #: .\templates\rental\client_cars.html:19
 msgid "You have no rented cars"
@@ -99,3 +95,15 @@ msgstr "Логин"
 #: .\templates\rental\login.html:14
 msgid "Password"
 msgstr "Пароль"
+
+#: .\templates\rental\registration.html:8
+msgid "Thank you for registering!"
+msgstr "Спасибо за регистрацию!"
+
+#: .\templates\rental\registration.html:10
+msgid "Register Here"
+msgstr "Регистрироваться здесь"
+
+#: .\templates\rental\registration.html:11
+msgid "Just fill out the form"
+msgstr "Просто заполните эту форму"

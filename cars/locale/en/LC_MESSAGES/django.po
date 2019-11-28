@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-28 16:18+0300\n"
+"POT-Creation-Date: 2019-11-28 18:34+0300\n"
 "PO-Revision-Date: 2019-11-28 15:30+0000\n"
 "Last-Translator: b'  <1@mail.ru>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,7 +47,7 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: .\templates\rental\base.html:43
+#: .\templates\rental\base.html:43 .\templates\rental\registration.html:17
 msgid "Register"
 msgstr ""
 
@@ -93,4 +93,16 @@ msgstr ""
 
 #: .\templates\rental\login.html:14
 msgid "Password"
+msgstr ""
+
+#: .\templates\rental\registration.html:8
+msgid "Thank you for registering!"
+msgstr ""
+
+#: .\templates\rental\registration.html:10
+msgid "Register Here"
+msgstr ""
+
+#: .\templates\rental\registration.html:11
+msgid "Just fill out the form"
 msgstr ""
