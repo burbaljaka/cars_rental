@@ -1,7 +1,17 @@
-{% block content %}
+{% extends "rental/base.html" %}
+{% block body_block %}
+<form method="post">{% csrf_token %}
+  <h1>Name: {{ car.car_mark}} {{ car.car_model }}</h1>
+  <p><strong>Issue year: </strong>{{ car.car_issue_year }}</p>
+  {% if car.car_status == "a" %}
+  <input type="submit" name="rent_button" value="Rent it!">
+  {% elif car.car_status == "o"%}
+   <input type="submit" name="return_button" value="Return">
+{% endif %}
+<input for="id_car_mark" type="text" name="car_mark" id="id_car_mark" value="{{ car.car_mark }}" style="display:none">
+<input for="id_car_model" type="text" name="car_model" id="id_car_model" value="{{ car.car_model }}" style="display:none">
+<input for="id_id" type="number" name="id" id = "id_id" value="{{ car.id }}" style="display:none">
+</form>
 
-<h1>Name: {{ car.car_mark}} {{ car.car_model }}</h1>
-<p><strong>Issue year: </strong>{{ car.car_issue_year }}</p>
-<input type="submit" name="" value="Rent it!">
 
 {% endblock %}

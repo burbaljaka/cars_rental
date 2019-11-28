@@ -1,8 +1,10 @@
-{% block content %}
+{% extends "rental/base.html" %}
+{% block body_block %}
+
     <h1>Our Available cars</h1>
 
     {% if cars_list %}
-    <ul>
+    <ol>
 
       {% for car in cars_list %}
       <li>
@@ -10,7 +12,7 @@
       </li>
       {% endfor %}
 
-    </ul>
+    </ol>
     {% else %}
       <p>There are no available cars</p>
     {% endif %}

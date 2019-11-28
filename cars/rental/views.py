@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
-from .models import Car, Loan
+from .models import Car
 from django.utils.timezone import localtime, now
 # Extra Imports for the Login and Logout Capabilities
 from django.contrib.auth import authenticate, login, logout
@@ -11,6 +11,9 @@ from django.contrib.auth.decorators import login_required
 from rental.forms import UserForm
 from django.views import generic
 from django.contrib.auth.models import User
+from django.views.generic.edit import UpdateView, FormView
+from .forms import CarRent
+from django.utils import timezone
 
 def index(request):
     try:
@@ -114,7 +117,7 @@ def user_login(request):
                 # Send the user back to some page.
                 # In this case their homepage.
                 current_user_id = request.user.id
-                return HttpResponseRedirect(reverse('rental:car_list'))
+                return HttpResponseRedirect(reverse('rental:cars_list'))
 #                return render(request, 'rental/tasks.html', context)
             else:
                 # If account is not active:
@@ -127,7 +130,7 @@ def user_login(request):
         return render(request, 'rental/login.html', {})
 
 def client_Loan_Cars(request):
-    loan_cars = Loan.objects.filter(loan_renter = request.user.id)
+    loan_cars = Car.objects.filter(car_renter = request.user.id, car_status = 'o')
     return render (request, 'rental/client_cars.html', context = {'cars_list': loan_cars})
 
 def car_list(request):
@@ -135,9 +138,46 @@ def car_list(request):
     return render (request, 'rental/cars_list.html', context = {'cars_list': available_cars})
 
 
-def User_info(request):
+# def User_info(request):
+#
+#     User.objects.filter(pk = request.user.id)
 
-    User.objects.filter(pk = request.user.id)
+# class CarDetailView(generic.DetailView):
+#     model = Car
 
-class CarDetailView(generic.DetailView):
+def car_detail(request, pk):
+    car_info = Car.objects.filter(pk = pk)[0]
+    current_user_id = request.user.id
+    print(request.POST)
+    if request.method == 'POST' and 'rent_button' in request.POST:
+        form = CarRent(request.POST)
+        if form.is_valid():
+            user = User.objects.get(pk = current_user_id)
+            car_info.car_renter = user
+            car_info.car_rent_date = timezone.now()
+            car_info.car_status = 'o'
+            car_info.save()
+            return HttpResponseRedirect(reverse('rental:client_cars'))
+        else:
+            print(form)
+    elif request.method == 'POST' and 'return_button' in request.POST:
+        form = CarRent(request.POST)
+        if form.is_valid():
+            car_info.car_renter = None
+            car_info.car_rent_date = None
+            car_info.car_status = 'a'
+            car_info.save()
+            return HttpResponseRedirect(reverse('rental:client_cars'))
+        else:
+            print(form)
+    else:
+        car_info = Car.objects.filter(pk = pk)[0]
+        return render (request, 'rental/car_detail.html', context = {'car':car_info})
+
+class CarUpdate(FormView):
     model = Car
+    template_name = 'rental/car_update_form.html'
+    form_class = CarRent
+
+    def get_success_url(self):
+            return HttpResponseRedirect(reverse('rental:client_cars'))

@@ -1,17 +1,20 @@
-{% block content %}
-    <h1>Our Available cars</h1>
+{% extends "rental/base.html" %}
+{% block body_block %}
+
+    <h1>Your rented cars</h1>
 
     {% if cars_list %}
-    <ul>
+    <ol>
 
       {% for car in cars_list %}
       <li>
-        <a href="{{ car.get_auto_absolute_url }}">{{ car.loan_date_of_return }}</a>
+        <a href="{{ car.get_auto_absolute_url }}">{{ car.car_mark }} {{car.car_model}}</a> {{ car.car_issue_year }}
+        <p>Rented: {{ car.car_rent_date }}</p>
       </li>
       {% endfor %}
 
-    </ul>
+    </ol>
     {% else %}
-      <p>There are no available cars</p>
+      <p>You have no rented cars</p>
     {% endif %}
 {% endblock %}
