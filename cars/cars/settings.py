@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rental',
-    'rosetta'
+    'rosetta',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -144,4 +145,8 @@ LANGUAGES = (
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale/'), )
 
-DEBUG_TOOLBAR_PATCH_SETTINGS = False 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+            'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+                ]
+}

@@ -19,6 +19,7 @@ from rental import views
 from django.conf.urls import include
 from django.conf.urls.i18n import i18n_patterns
 
+
 urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('',views.index,name='index'),
@@ -28,4 +29,5 @@ urlpatterns = i18n_patterns(
     path('logout/', views.user_logout, name='logout'),
     path('register/',views.register,name='register'),
     path('user_login/',views.user_login,name='user_login'),
+    path('api/', include('api.urls', namespace = 'api'))
 )
