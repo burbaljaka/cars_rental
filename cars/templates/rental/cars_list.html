@@ -1,0 +1,20 @@
+{% extends "rental/base.html" %}
+{% load i18n %}
+{% block body_block %}
+
+    <h1>{% trans "Our Available cars" %}</h1>
+
+    {% if cars_list %}
+    <ol>
+
+      {% for car in cars_list %}
+      <li>
+        <a href="{{ car.get_auto_absolute_url }}">{{ car.car_mark }} {{car.car_model}}</a> {{ car.car_issue_year }}
+      </li>
+      {% endfor %}
+
+    </ol>
+    {% else %}
+      <p>There are no available cars</p>
+    {% endif %}
+{% endblock %}

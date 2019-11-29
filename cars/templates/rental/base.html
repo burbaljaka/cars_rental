@@ -1,8 +1,9 @@
+    {% load i18n %}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Tasks</title>
+    <title>Car rent</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -15,30 +16,31 @@
         <ul class="nav navbar-nav">
 
           {# Django Home Link / Admin Link / Register Link#}
-          <li><a class="navbar-brand" href="{% url 'index' %}">Welcome page</a></li>
+          <li><a class="navbar-brand" href="{% url 'index' %}">{% trans "Welcome page" %}</a></li>
+          <li> {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            <div class="languages">
+              <p>{% trans "Language" %}:</p>
+              <ul class="languages">
+                {% for language in languages %}
+                <li><a href="/{{ language.code }}/"{% if language.code == LANGUAGE_CODE %} class="selected"{% endif %}>
+                  {{ language.name_local }}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </li>
 
 
 
           {# Some logic on what to display for last item#}
           {% if user.is_authenticated %}
-            <li><a href="{% url 'logout' %}">Logout</a></li>
-            <!-- <li><a class="navbar-link" href="{% url 'rental:user_tasks_view' %}">Your tasks, {{ user.username }}</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="{% url 'rental:reports' %}?period=this_day">This day</a></li>
-                <li><a href="{% url 'rental:reports' %}?period=last_day">Previous day</a></li>
-                <li><a href="{% url 'rental:reports' %}?period=15_days">15 last days</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="{% url 'rental:reports' %}?period=this_month">Current month</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="{% url 'rental:reports' %}?period=last_month">Last month</a></li>
-              </ul>
-            </li> -->
+            <li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
+            <li><a href="{% url 'rental:client_cars' %}">{% trans 'Your cars'%}</a></li>
 
           {% else %}
-            <li><a class="navbar-link" href="{% url 'user_login' %}">Login</a></li>
-            <li><a class="navbar-link" href="{% url 'register' %}">Register</a></li>
+            <li><a class="navbar-link" href="{% url 'user_login' %}">{% trans 'Login' %}</a></li>
+            <li><a class="navbar-link" href="{% url 'register' %}">{% trans 'Register' %}</a></li>
           {% endif %}
 
         </ul>
