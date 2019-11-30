@@ -14,7 +14,7 @@
           {% csrf_token %}
           {{ user_form.as_p }}
           {{ profile_form.as_p }}
-          <input type="submit" name="" value="{% trans "Register" %}>
+          <input type="submit" name="" value={% trans "Register" %}>
         </form>
 
       {% endif %}
