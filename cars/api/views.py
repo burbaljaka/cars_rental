@@ -16,6 +16,6 @@ class UserListView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-# class UserCarsListView(APIView):
-#     queryset = Car.objects.filter(car_renter = pk, car_status = 'o')
-#     serializer_class = UserAndCarSerializer
+class UserCarsListView(APIView):
+	queryset = Car.objects.filter(car_renter = pk, car_status = 'o')
+	serializer_class = UserAndCarSerializer
