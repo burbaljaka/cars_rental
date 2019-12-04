@@ -10,5 +10,5 @@ router.register('cars', CarListView)
 urlpatterns = [
     path('cars/', CarListView.as_view(), name = 'cars'),
     path('users/', UserListView.as_view(), name = 'users'),
-    path('users/<int:pk>/', UserCarsListView.as_view(), name = 'usercars'),
+    # path('users/<pk>/', UserCarsListView.as_view(), name = 'usercars'),
 ]

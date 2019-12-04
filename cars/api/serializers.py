@@ -6,7 +6,7 @@ from rental.models import Car
 class UserAndCarSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username']
+        fields = ['email']
 
 
 class CarSerializer(serializers.ModelSerializer):
@@ -21,7 +21,9 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'first_name', 'last_name', 'email')
 
-class UserAnsCarSerializer(serializers.ModelSerializer):
+class UserCarSerializer(serializers.ModelSerializer):
+    modules = UserAndCarSerializer(many = True, read_only = True)
+
     class Meta:
         model = Car
-        fields = ['car_mark', 'car_model', 'car_issue_year']
+        fields = ['car_mark', 'car_model', 'car_issue_year', 'modules']
